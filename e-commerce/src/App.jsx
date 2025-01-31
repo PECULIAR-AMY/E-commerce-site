@@ -1,7 +1,7 @@
 // import About from './components/About';
 // import Login from './components/LogIn';
-// import Home from './components/HomePage';
-import Cart from './components/Cart'
+ import Cart from './components/Cart'
+// import Cart from './components/Cart'
 // import Account from "./components/AccountDopdown";
 // import Contact from './components/Contact';
 // import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
