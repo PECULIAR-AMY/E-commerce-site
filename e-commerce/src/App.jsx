@@ -1,31 +1,30 @@
-// import About from './components/About';
-// import Login from './components/LogIn';
- import Cart from './components/Cart'
+ import HomePage from './components/HomePage';
+ import Login from './components/LogIn';
+ import About from './components/About'
+// import CheckOut from "./components/CheckOut";
 // import Cart from './components/Cart'
 // import Account from "./components/AccountDopdown";
 // import Contact from './components/Contact';
-// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 
 function App() {
   return (
-    <Cart />
-  //  <About />
-    // <Login />
-    // <Router>
-    //   <nav className="p-4 bg-gray-500">
-    //     <Link to="/" className="mr-4 text-blue-500">Home</Link>
-    //     <Link to="/about" className="text-blue-500">About</Link>
-    //   </nav>
-
-    //   <div className="p-4">
-    //     <Routes>
-    //       <Route path="/" element={<Home />} />
-    //       <Route path="/about" element={<About />} />
-    //     </Routes>
-    //   </div>
-    // </Router>
-  );
+    <div className="App"> 
+     <Router>
+     <div>
+      <Link to='/'> Home</Link>
+      <Link to='/Login'> Login</Link>
+      <Link to='/About'> About</Link>
+     </div>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route  path='/Login' element = {<Login />}/>
+        <Route  path='/About' element = {<About />}/>
+      </Routes>
+     </Router>
+    </div>
+  )
 }
 
 export default App;

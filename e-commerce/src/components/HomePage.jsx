@@ -62,9 +62,9 @@ function Home (){
     <div>
     </div>
 
-    <ul className=" flex p-4 gap-10">
+    <ul className=" flex p-4 gap-10 ">
         {items.slice(0,4).map((item) => (
-          <div key= {item.id} className="border p-4 rounded-lg shadow-md">
+          <div key= {item.id} className="border p-4 rounded-lg shadow-mdmax-w-sm rounded-lg overflow-hidden shadow-lg border p-4 ">
             <img 
             src= {item.image}
             alt={item.title}
