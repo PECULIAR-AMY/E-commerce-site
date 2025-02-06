@@ -1,13 +1,10 @@
-import { useEffect, useState} from 'react'
-import axios from 'axios';
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { ShoppingCart, Heart, User } from "lucide-react";
 
+function Cart() {
+  const [items, setItems] = useState([]);
 
-
-function Cart (){
-  const [Items, setItems] = useState([]);
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,102 +15,82 @@ function Cart (){
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
   }, []);
-  
+
   return (
-    <di>
-  <div className="flex items-center justify-between p-4">
-        <div className="text-lg font-bold">Exclusive</div>
-        <div>Home</div>
-        <div>Contact</div>
-        <div>About</div>
-        <div>Sign Up</div>
-        <input type="search" placeholder="Search" className="border p-2" />
-        <Heart size={24} />
-        <ShoppingCart size={24} />
-        <User size={24} />
-      </div>
-      <h2>Home/Cart</h2>
-
-      <div className=" mt-10">
-       <div className="flex gap-100">
-         <h2>Product</h2>
-         <h2>Price</h2>
-         <h1>Quantity</h1>
-         <h2>Subtotal</h2>
+    <div className="container mx-auto p-6">
+      {/* Navbar */}
+      <div className="flex items-center justify-between py-4 border-b mb-6">
+        <h1 className="text-xl font-bold">Exclusive</h1>
+        <nav className="flex gap-6">
+          <a href="#" className="hover:text-gray-600">Home</a>
+          <a href="#" className="hover:text-gray-600">Contact</a>
+          <a href="#" className="hover:text-gray-600">About</a>
+          <a href="#" className="hover:text-gray-600">Sign Up</a>
+        </nav>
+        <div className="flex items-center gap-4">
+          <input type="search" placeholder="Search" className="border p-2 rounded-lg" />
+          <Heart size={24} className="cursor-pointer" />
+          <ShoppingCart size={24} className="cursor-pointer" />
+          <User size={24} className="cursor-pointer" />
         </div>
+      </div>
 
+      <h2 className="text-xl font-semibold mb-4">Home / Cart</h2>
 
-        <div className="flex gap-100 mt-10">
-         
-        <ul>
-        {Items.map((item) => (
-          <li key={item.id} className="border p-4 rounded-lg shadow-md">
-            <img 
-              src={item.image} 
-              alt={item.title} 
-              className="w-48 h-20 object-cover mx-auto"
-            />
-            <h3 className="text-lg font-semibold mt-2"></h3>
-          </li>
-        ))}
-      </ul>
-         <h2>price</h2>
-         <h1>Quantity</h1>
-         <h2>Subtotal</h2>
+      {/* Cart Header */}
+      <div className="grid grid-cols-4 font-semibold border-b pb-2">
+        <h3>Product</h3>
+        <h3>Price</h3>
+        <h3>Quantity</h3>
+        <h3>Subtotal</h3>
+      </div>
+
+      {/* Cart Items */}
+      {items.map((item) => (
+        <div key={item.id} className="grid grid-cols-4 items-center py-4 border-b">
+          <div className="flex items-center gap-4">
+            <img src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded-md" />
+            <p className="text-sm font-medium">{item.title}</p>
+          </div>
+          <p className="text-sm">${item.price.toFixed(2)}</p>
+          <input
+            type="number"
+            defaultValue={1}
+            min={1}
+            className="w-12 border text-center rounded-md"
+          />
+          <p className="text-sm font-semibold">${item.price.toFixed(2)}</p>
         </div>
-        <div className="flex gap-100 mt-10">
-        
-        <ul>
-        {Items.map((item) => (
-          <li key={item.id} className="border p-4 rounded-lg shadow-md">
-            <img 
-              src={item.image} 
-              alt={item.title} 
-              className="w-48 h-20 object-cover mx-auto"
-            />
-            <h3 className="text-lg font-semibold mt-2"></h3>
-          </li>
-        ))}
-      </ul>
-         <h2>Price</h2>
-         <h1>Quantity</h1>
-         <h2>Subtotal</h2>
-        </div>  
+      ))}
+
+      {/* Cart Actions */}
+      <div className="flex justify-between mt-6">
+        <button className="border px-6 py-2 rounded-md hover:bg-gray-100">Return to Shop</button>
+        <button className="border px-6 py-2 rounded-md hover:bg-gray-100">Update Cart</button>
       </div>
 
-     <div className='flex gap-100 mt-20'>
-     <div>
-        <button className='border pt-4 pb-4 pr-4 pl-4'>  Return to shop</button>
-      </div>
-      <div>
-        <button className='border pt-4 pb-4 pr-4 pl-4'> Update Cart</button>
-      </div>
-     </div>
-
-     <div className='flex gap-20 mt-10' >
-      <div>
-        <button className='border pt-4 pb-4 pr-4 pl-4'> Coupon code</button>
-      </div>
-      <div>
-        <button className='border pt-4 pb-4 pr-4 pl-4 bg-red-500'>  Coupon code</button>
-      </div>
-      <div>
-        <button className='border pt-4 pb-4 pr-4 pl-4 '> 
-          Cart total
-
-          <button className='p-4'>subtotal</button>
-          <button> $1750</button>
+      {/* Checkout Section */}
+      <div className="flex justify-between mt-10 bg-gray-100 p-6 rounded-lg">
+        <input
+          type="text"
+          placeholder="Coupon Code"
+          className="border p-2 rounded-lg w-1/3"
+        />
+        <button className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600">
+          Apply Coupon
         </button>
-       
+        <div>
+          <p className="text-lg font-semibold">Cart Total</p>
+          <p className="text-sm">Subtotal: $1750</p>
+          <button className="bg-blue-600 text-white px-6 py-2 rounded-md mt-2 hover:bg-blue-700">
+            Proceed to Checkout
+          </button>
+        </div>
       </div>
-      
-     </div>
-
-    </di>
-  )
+    </div>
+  );
 }
 
 export default Cart;

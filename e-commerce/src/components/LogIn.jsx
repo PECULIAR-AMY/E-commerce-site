@@ -1,115 +1,123 @@
-import { Heart, ShoppingCart, User } from 'lucide-react'
-import ImageLogo from '../images/shop items.jpg'
-import { Instagram, Youtube, Facebook, Twitter } from 'lucide-react'
+import { Heart, ShoppingCart, User, Instagram, Youtube, Facebook, Twitter } from 'lucide-react';
+import ImageLogo from '../images/shop items.jpg';
+
 const Login = () => {
     return (
-   <div>
-    <div className='flex items-center justify-between p-4'>
-    <div className='font-size-18'>Exclusive</div>
-    <div className=''>Home</div>
-    <div className=''>Contact</div>
-    <div className=''>About</div>
-    <div>SignUp</div>
-    <input
-     type='Search'
-     placeholder='search'
-     />
-     <Heart size ={24} />
-     <ShoppingCart size={24} />
-     <User size= {24} />
-    </div>
-
-    <div className='flex mt-10 mb-100 gap-40'>
-        <img src= {ImageLogo} alt= 'image' />
-        <div>
-        <h1>Log in to Exclusive </h1>
-        <h3>Enter your details below</h3>
-        <form className="p-4 max-w-md mx-auto ">
-      <label className="block mb-2">
-        Name:
-        <input
-          type="text"
-          name="name"
-          className="border p-2 w-full mb-4"
-          placeholder="Your name"
-        />
-      </label>
-      <label className="block mb-2">
-        Email:
-        <input
-          type="email"
-          name="email"
-          className="border p-2 w-full mb-4"
-          placeholder="Your email"
-        />
-      </label>
-      <label className="block mb-2">
-        Message:
-        <textarea
-          name="message"
-          className="border p-2 w-full mb-4"
-          placeholder="Your message"
-        />
-      </label>
-      <button
-        type="submit"
-        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-green-600"
-      >
-        LogIn 
-      </button>
-      <button className='bg-white text-black px-4 py-2 rounded hover: bg-red'> 
-       Forgotten password? 
-      </button>
-    </form>
+        <div className="bg-gray-50 min-h-screen flex flex-col items-center p-6">
+            {/* Navbar */}
+            <div className="flex items-center justify-between w-full max-w-6xl py-4 px-6 bg-white shadow-md rounded-lg">
+                <h1 className="text-2xl font-bold text-gray-800">Exclusive</h1>
+                <nav className="hidden md:flex gap-6 text-gray-600 font-medium">
+                    <a href="#" className="hover:text-gray-900">Home</a>
+                    <a href="#" className="hover:text-gray-900">Contact</a>
+                    <a href="#" className="hover:text-gray-900">About</a>
+                    <a href="#" className="hover:text-gray-900">Sign Up</a>
+                </nav>
+                <div className="flex gap-4 items-center">
+                    <input type="text" placeholder="Search" className="border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400" />
+                    <Heart className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
+                    <ShoppingCart className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
+                    <User className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
+                </div>
+            </div>
+            
+            {/* Login Section */}
+            <div className="flex flex-col md:flex-row items-center gap-16 mt-12 w-full max-w-6xl bg-white p-8 shadow-lg rounded-xl">
+                <img src={ImageLogo} alt="image" className="w-full md:w-1/2 h-auto object-cover rounded-lg shadow-md" />
+                <div className="w-full md:w-1/2">
+                    <h1 className="text-3xl font-bold text-gray-800">Log in to Exclusive</h1>
+                    <h3 className="text-gray-600 mt-2">Enter your details below</h3>
+                    
+                    <form className="mt-6">
+                        <label className="block mb-4">
+                            <span className="text-gray-700">Name:</span>
+                            <input
+                                type="text"
+                                name="name"
+                                className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                placeholder="Your name"
+                            />
+                        </label>
+                        <label className="block mb-4">
+                            <span className="text-gray-700">Email:</span>
+                            <input
+                                type="email"
+                                name="email"
+                                className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                placeholder="Your email"
+                            />
+                        </label>
+                        <label className="block mb-4">
+                            <span className="text-gray-700">Message:</span>
+                            <textarea
+                                name="message"
+                                className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                placeholder="Your message"
+                            />
+                        </label>
+                        <div className="flex gap-4">
+                            <button
+                                type="submit"
+                                className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+                            >
+                                Log In
+                            </button>
+                            <button className="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-300 transition">
+                                Forgotten password?
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+     {/* Footer */}
+     <footer className="bg-black text-white mt-16 p-10">
+        <div className="grid grid-cols-5 gap-8">
+          <div>
+            <h2 className="text-lg font-bold">Exclusive</h2>
+            <p>Subscribe & get 10% off your first order</p>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="mt-2 p-2 rounded-md text-black w-full"
+            />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold">Support</h2>
+            <p>111 Bjoy Sarani, Dhaka, Bangladesh</p>
+            <p>exclusive@gmail.com</p>
+            <p>+4566787897832</p>
+          </div>
+          <div>
+            <h2 className="text-lg font-bold">Account</h2>
+            <ul className="space-y-1">
+              <li>My Account</li>
+              <li>Login/Register</li>
+              <li>Cart</li>
+              <li>Wishlist</li>
+              <li>Shop</li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-lg font-bold">Quick Links</h2>
+            <ul className="space-y-1">
+              <li>Privacy Policy</li>
+              <li>Terms of Use</li>
+              <li>FAQ</li>
+              <li>Contact</li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-lg font-bold">Download App</h2>
+            <p>Save $3 with our new look</p>
+            <div className="flex gap-3 mt-2">
+              <Instagram size={24} />
+              <Facebook size={24} />
+              <Twitter size={24} />
+              <Youtube size={24} />
+            </div>
+          </div>
         </div>
-    </div>
-
-    <div className='flex items-center justify-between gap-4 bg-black text-white h-50 mt-50'>
-        <div className=''>
-         <h2>Exclusive</h2>
-         <h3>subscribe</h3>
-         <h3>get 10% off your first order</h3>
-         <button className='bg-white text-black'>
-            Enter your email
-         </button>
-        </div>
-        <div className=''>
-         <h2>Support</h2>
-         <h3>111 Bjoy sarani dhaka Dh 1515, Bangladesh</h3>
-         <h3>get 10% off your first order</h3>
-         <p>exclusive@gmail.com</p>
-         <h1>+ 4566787897832</h1>
-        </div>
-        <div className=''>
-         <h2>Account</h2>
-         <h3>My Account</h3>
-         <h3>Login/Register</h3>
-         <h3>Cart</h3>
-         <h3>Wishlist</h3>
-         <h3>Shop</h3>
-        </div>
-        <div className=''>
-         <h2>Quick link</h2>
-         <h3>Privacy Policy</h3>
-         <h3>Terms of use</h3>
-         <h3>FAQ</h3>
-         <h3>Contact</h3>
-        </div>
-        <div className=''>
-         <h2>Download App</h2>
-         <h3>Save s3 with App new look</h3>
-         <div className='flex gap-5'> 
-        <Instagram />
-         <Facebook />
-         <Twitter />
-         <Youtube />
-         </div>
-        </div>
-        <div>
-
-        </div>
-    </div>
-
+      </footer>
    </div>
     )
 }
