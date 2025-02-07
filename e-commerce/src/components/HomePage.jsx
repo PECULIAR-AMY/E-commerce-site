@@ -1,5 +1,6 @@
-import { ShoppingCart, Heart, ChevronRight, Star, Delete, Headphones, ArrowLeft, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Heart, ChevronRight, Star, Delete, Headphones, ArrowLeft, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import ImageLogo from '../images/iPhone 15 Pro.jpeg'
+
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -36,25 +37,6 @@ function Home() {
 
     return (
         <div className="px-6 md:px-16 max-w-screen-xl mx-auto">
-            {/* Navbar */}
-            <div className='flex justify-between items-center py-4 border-b'>
-                <h1 className='text-2xl font-bold'>Exclusive</h1>
-                <div className="hidden md:flex gap-8">
-                    {['Home', 'Contact', 'About', 'Sign Up'].map(link => (
-                        <h1 key={link} className='cursor-pointer hover:text-gray-500'>{link}</h1>
-                    ))}
-                </div>
-                <div className="flex gap-4 items-center">
-                    <input
-                        type='search'
-                        placeholder='Search'
-                        className="border p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                    />
-                    <Heart size={20} className="cursor-pointer hover:text-red-500" />
-                    <ShoppingCart size={20} className="cursor-pointer hover:text-gray-500" />
-                </div>
-            </div>
-
             {/* Hero Section */}
             <div className="flex flex-col md:flex-row gap-10 items-center mt-10">
             <div className="space-y-4 w-full md:w-1/4">

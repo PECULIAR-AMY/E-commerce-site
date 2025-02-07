@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react'
-import { Heart, ShoppingCart, User, Circle } from 'lucide-react'
+import { Circle } from 'lucide-react'
 import axios from 'axios'
 
 function CheckOut(){
@@ -22,17 +22,6 @@ function CheckOut(){
 
     return(
         <div>
-        <div className="flex items-center justify-between p-4">
-        <div className="text-lg font-bold">Exclusive</div>
-        <div>Home</div>
-        <div>Contact</div>
-        <div>About</div>
-        <div>Sign Up</div>
-        <input type="search" placeholder="Search" className="border p-2" />
-        <Heart size={24} />
-        <ShoppingCart size={24} />
-        <User size={24} />
-      </div>
       <h2 className='mt-4 mb-6'>Home/ My Account /Product / View Cart/ CheckOut</h2>
 
       <div className='mt-4 mb-6'>

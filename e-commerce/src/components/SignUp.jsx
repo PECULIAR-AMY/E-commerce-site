@@ -1,52 +1,50 @@
-import { Heart, ShoppingCart, User, ArrowRight, ArrowLeft } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Monitor, Watch, Camera, Headphones, Gamepad2 } from 'lucide-react';
 import ShopItem from '../images/shop items.jpg';
 
 const SignUp = () => {
-  return (
-    <div className="p-4">
-      {/* Navbar */}
-      <div className="flex items-center justify-between p-4 bg-gray-100 shadow-md rounded-lg">
-        <div className="text-2xl font-bold">Exclusive</div>
-        <div className="flex gap-6 text-lg">
-          <div className="hover:text-blue-500 cursor-pointer">Home</div>
-          <div className="hover:text-blue-500 cursor-pointer">Contact</div>
-          <div className="hover:text-blue-500 cursor-pointer">About</div>
-          <div className="hover:text-blue-500 cursor-pointer">Sign Up</div>
-        </div>
-        <div className="flex items-center gap-4">
-          <input
-            type="search"
-            placeholder="Search"
-            className="border p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <Heart size={24} className="cursor-pointer text-gray-600 hover:text-red-500" />
-          <ShoppingCart size={24} className="cursor-pointer text-gray-600 hover:text-blue-500" />
-          <User size={24} className="cursor-pointer text-gray-600 hover:text-green-500" />
-        </div>
-      </div>
+    return (
+        <div className='p-6'>
+           
 
-      {/* Category Section */}
-      <div className="flex items-center justify-between mt-10">
-        <div>
-          <div className="flex items-center gap-4 mb-6">
-            <h1 className="text-2xl font-bold">Browse By Category</h1>
-            <ArrowLeft size={24} className="cursor-pointer hover:text-gray-500" />
-            <ArrowRight size={24} className="cursor-pointer hover:text-gray-500" />
-          </div>
+            {/* Category Section */}
+            <div className='flex gap-12 mt-10'>
+                <div className='w-2/3'>
+                    <div className='flex items-center justify-between mb-4'>
+                        <h1 className='text-2xl font-semibold'>Browse By Category</h1>
+                        <div className='flex gap-2'>
+                            <ArrowLeft size={24} className='cursor-pointer hover:text-gray-600' />
+                            <ArrowRight size={24} className='cursor-pointer hover:text-gray-600' />
+                        </div>
+                    </div>
 
-          <div className="grid grid-cols-4 gap-6 p-4 bg-gray-100 rounded-lg shadow-md">
-            <div className="bg-blue-500 p-10 rounded-md hover:opacity-75 cursor-pointer"></div>
-            <div className="bg-red-500 p-10 rounded-md hover:opacity-75 cursor-pointer"></div>
-            <div className="bg-green-500 p-10 rounded-md hover:opacity-75 cursor-pointer"></div>
-            <div className="bg-yellow-500 p-10 rounded-md hover:opacity-75 cursor-pointer"></div>
-          </div>
+                    {/* Category Grid */}
+                    <div className=' grid grid-cols-5 gap-6 p-4 rounded-lg shadow-md'>
+                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
+                            <Monitor size={40} />
+                            <span className='mt-2'>Computer</span>
+                        </div>
+                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
+                            <Watch size={40} />
+                            <span className='mt-2'>Wrist Watch</span>
+                        </div>
+                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
+                            <Camera size={40} />
+                            <span className='mt-2'>Camera</span>
+                        </div>
+                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
+                            <Headphones size={40} />
+                            <span className='mt-2'>Headphones</span>
+                        </div>
+                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
+                            <Gamepad2 size={40} />
+                            <span className='mt-2'>Gaming</span>
+                        </div>
+                    </div>
+                </div>
+                <img src={ShopItem} alt='logo' className='w-1/3 rounded-lg shadow-md' />
+            </div>
         </div>
-        
-        {/* Image */}
-        <img src={ShopItem} alt="Shop Items" className="w-96 rounded-lg shadow-lg" />
-      </div>
-    </div>
-  );
+    );
 };
 
 export default SignUp;

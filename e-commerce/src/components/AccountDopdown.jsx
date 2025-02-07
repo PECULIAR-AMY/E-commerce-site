@@ -1,28 +1,8 @@
-import { Heart, ShoppingCart, User } from 'lucide-react';
 
 const Account = () => {
   return (
     <div className="p-6 space-y-6">
-      {/* Navbar */}
-      <div className="flex items-center justify-between bg-gray-100 p-4 rounded-lg shadow-md">
-        <div className="text-lg font-semibold">Exclusive</div>
-        <div className="flex space-x-6">
-          <div className="cursor-pointer hover:text-gray-700">Home</div>
-          <div className="cursor-pointer hover:text-gray-700">Contact</div>
-          <div className="cursor-pointer hover:text-gray-700">About</div>
-          <div className="cursor-pointer hover:text-gray-700">SignUp</div>
-        </div>
-        <div className="flex items-center space-x-4">
-          <input
-            type="search"
-            placeholder="Search"
-            className="border rounded-lg px-3 py-1 outline-none focus:ring-2 focus:ring-gray-300"
-          />
-          <Heart size={24} className="cursor-pointer" />
-          <ShoppingCart size={24} className="cursor-pointer" />
-          <User size={24} className="cursor-pointer" />
-        </div>
-      </div>
+      
 
       {/* Breadcrumb */}
       <div className="flex items-center space-x-4 text-gray-600">

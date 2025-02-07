@@ -1,5 +1,5 @@
 import ImageLogo from '../images/We shop.jpg'
-import { Heart, ShoppingCart, User, Twitter, Instagram, Linkedin, Truck, Headset, CheckCircle, Facebook, Youtube} from 'lucide-react'
+import { Twitter, Instagram, Linkedin, Truck, Headset, CheckCircle, Facebook, Youtube} from 'lucide-react'
 import Image1 from '../images/standing man 1.jpg'
 import Image2 from '../images/Beautiful woman 1.jpg'
 import Image3 from '../images/Standing man 2.jpg'
@@ -7,22 +7,6 @@ import Image3 from '../images/Standing man 2.jpg'
 const About = () =>{
 return(
     <div className='px-20'>
-    <div className="flex justify-between items-center py-4 border-b border-gray-300">
-        <h1 className="text-3xl font-extrabold text-gray-800">Exclusive</h1>
-        <nav className="hidden md:flex gap-6 text-gray-600 font-medium">
-          <a href="#" className="hover:text-gray-900">Home</a>
-          <a href="#" className="hover:text-gray-900">Contact</a>
-          <a href="#" className="hover:text-gray-900">About</a>
-          <a href="#" className="hover:text-gray-900">Sign Up</a>
-        </nav>
-        <div className="flex gap-4 items-center">
-          <input type="text" placeholder="Search" className="border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400" />
-          <Heart className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
-          <ShoppingCart className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
-          <User className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
-        </div>
-      </div>
-
       {/* Breadcrumb */}
       <div className="py-4 text-gray-500 text-sm">
         <span>Home</span> / <span className="font-semibold text-gray-800">About</span>

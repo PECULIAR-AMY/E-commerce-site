@@ -1,25 +1,9 @@
-import { Heart, ShoppingCart, User, Instagram, Youtube, Facebook, Twitter } from 'lucide-react';
+import { Instagram, Youtube, Facebook, Twitter } from 'lucide-react';
 import ImageLogo from '../images/shop items.jpg';
 
 const Login = () => {
     return (
         <div className="bg-gray-50 min-h-screen flex flex-col items-center p-6">
-            {/* Navbar */}
-            <div className="flex items-center justify-between w-full max-w-6xl py-4 px-6 bg-white shadow-md rounded-lg">
-                <h1 className="text-2xl font-bold text-gray-800">Exclusive</h1>
-                <nav className="hidden md:flex gap-6 text-gray-600 font-medium">
-                    <a href="#" className="hover:text-gray-900">Home</a>
-                    <a href="#" className="hover:text-gray-900">Contact</a>
-                    <a href="#" className="hover:text-gray-900">About</a>
-                    <a href="#" className="hover:text-gray-900">Sign Up</a>
-                </nav>
-                <div className="flex gap-4 items-center">
-                    <input type="text" placeholder="Search" className="border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400" />
-                    <Heart className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
-                    <ShoppingCart className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
-                    <User className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
-                </div>
-            </div>
             
             {/* Login Section */}
             <div className="flex flex-col md:flex-row items-center gap-16 mt-12 w-full max-w-6xl bg-white p-8 shadow-lg rounded-xl">

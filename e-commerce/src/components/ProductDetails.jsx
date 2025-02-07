@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Heart, ShoppingCart, User } from "lucide-react";
+import { ShoppingCart,  } from "lucide-react";
 
 function Cart() {
   const [items, setItems] = useState([]);
@@ -18,17 +18,6 @@ function Cart() {
 
   return (
     <div>
-      <div className="flex items-center justify-between p-4">
-        <div className="text-lg font-bold">Exclusive</div>
-        <div>Home</div>
-        <div>Contact</div>
-        <div>About</div>
-        <div>Sign Up</div>
-        <input type="search" placeholder="Search" className="border p-2" />
-        <Heart size={24} />
-        <ShoppingCart size={24} />
-        <User size={24} />
-      </div>
 
       <div className="flex gap-20 p-10 ">
         <h1 className="text-2xl font-bold">Wishlist</h1>
