@@ -1,11 +1,13 @@
-import { Heart, ChevronRight, Star, Delete, Headphones, ArrowLeft, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
-import ImageLogo from '../images/iPhone 15 Pro.jpeg'
-
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Heart, ChevronRight, Star, Trash as Delete, Headphones, ArrowLeft, ArrowRight, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import ImageLogo from '../images/iPhone 15 Pro.jpeg';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Home() {
     const [items, setItems] = useState([]);
+    const [Cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart")) || []);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("https://fakestoreapi.com/products")
@@ -13,34 +15,43 @@ function Home() {
             .catch(error => console.error("Error fetching data", error));
     }, []);
 
-        const [watchCount, setWatchCount] = useState(() => {
-            return parseInt(localStorage.getItem("watchCount")) || 0;
-        });
-        
-        const [currentTime, setCurrentTime] = useState(new Date());
-    
-        useEffect(() => {
-            localStorage.setItem("watchCount", watchCount);
-        }, [watchCount]);
-    
-        useEffect(() => {
-            // Update time every second
-            const timeInterval = setInterval(() => {
-                setCurrentTime(new Date());
-                setWatchCount(prevCount => prevCount + 1);
-            }, 1000);
-    
-            return () => clearInterval(timeInterval); // Cleanup interval on unmount
-        }, []);
-    
-    
+    const [watchCount, setWatchCount] = useState(() => parseInt(localStorage.getItem("watchCount")) || 0);
+    const [currentTime, setCurrentTime] = useState(new Date());
+
+    useEffect(() => {
+        localStorage.setItem("watchCount", watchCount);
+    }, [watchCount]);
+
+    useEffect(() => {
+        const timeInterval = setInterval(() => {
+            setCurrentTime(new Date());
+            setWatchCount(prevCount => prevCount + 1);
+        }, 1000);
+
+        return () => clearInterval(timeInterval);
+    }, []);
+
+    const AddToCart = (item) => {
+        const updatedCart = [...Cart, item];
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+    };
+
+    const RemoveFromCart = (itemId) => {
+        const updatedCart = Cart.filter(item => item.id !== itemId);
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+    };
+
+
+
 
     return (
         <div className="px-6 md:px-16 max-w-screen-xl mx-auto">
             {/* Hero Section */}
             <div className="flex flex-col md:flex-row gap-10 items-center mt-10">
             <div className="space-y-4 w-full md:w-1/4">
-    <h1 className="text-lg font-semibold">Categories</h1>
+    <button className="text-lg font-semibold">Categories</button>
     {[
         "Women's Fashion",
         "Men's Fashion",
@@ -70,6 +81,30 @@ function Home() {
                     <h1 className="text-xl font-semibold">Flash Sales</h1>
                     <button className="bg-red-500 text-white py-2 px-4 rounded">View All</button>
                 </div>
+
+
+                {/* Cart Section */}
+     <div className="mt-10">
+    <h2 className="text-xl font-semibold">Cart Items</h2>
+    {Cart.length > 0 ? (
+        <ul className="mt-4 space-y-2">
+            {Cart.map((item) => (
+                <li key={item.id} className="flex justify-between border p-2 rounded shadow">
+                    <span>{item.title} - ${item.price}</span>
+                    <button 
+                        onClick={() => RemoveFromCart(item.id)} 
+                        className="bg-red-500 text-white px-3 py-1 rounded text-sm"
+                    >
+                        Remove
+                    </button>
+                </li>
+            ))}
+        </ul>
+       ) : (
+        <p className="text-gray-500 mt-2">Your cart is empty.</p>
+    )}
+</div>
+
           
             {/* (Locally store watch counter) */}
 
@@ -80,8 +115,8 @@ function Home() {
                 <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
                     {items.slice(0, 4).map((item) => (
                         <li key={item.id} className="border p-4 rounded-lg shadow-md text-center relative">
-                            <Heart size={24} className="absolute top-2 left-2 text-red-500 cursor-pointer" />
-                            <Delete size={24} className="absolute top-2 right-2 text-gray-500 cursor-pointer" />
+                            <Heart   onClick={() =>navigate("/cart")} size={24} className="absolute top-2 left-2 text-red-500 cursor-pointer" />
+                            <Delete size={24} className="absolute top-2 right-2 text-gray-500 cursor-pointer" onClick={() =>RemoveFromCart(item.id)} />
                             <div className="w-full h-40 flex justify-center items-center">
                                 <img src={item.image} alt={item.title} className="h-24 object-contain" />
                             </div>
@@ -92,7 +127,7 @@ function Home() {
                             <div className="flex justify-center gap-1 my-2">
                                 {[...Array(5)].map((_, index) => <Star key={index} size={14} color="gold" />)}
                             </div>
-                            <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded text-sm">Add to Cart</button>
+                            <button onClick={() => AddToCart(item)} className="mt-2 bg-blue-500 text-white px-4 py-2 rounded text-sm">Add to Cart</button>
                         </li>
                     ))}
                 </ul>
