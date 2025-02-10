@@ -1,47 +1,66 @@
-import { ArrowRight, ArrowLeft, Monitor, Watch, Camera, Headphones, Gamepad2 } from 'lucide-react';
+import { useState } from 'react';
 import ShopItem from '../images/shop items.jpg';
 
 const SignUp = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form submitted:', formData);
+    };
+
     return (
-        <div className='p-6'>
-           
-
-            {/* Category Section */}
-            <div className='flex gap-12 mt-10'>
-                <div className='w-2/3'>
-                    <div className='flex items-center justify-between mb-4'>
-                        <h1 className='text-2xl font-semibold'>Browse By Category</h1>
-                        <div className='flex gap-2'>
-                            <ArrowLeft size={24} className='cursor-pointer hover:text-gray-600' />
-                            <ArrowRight size={24} className='cursor-pointer hover:text-gray-600' />
-                        </div>
-                    </div>
-
-                    {/* Category Grid */}
-                    <div className=' grid grid-cols-5 gap-6 p-4 rounded-lg shadow-md'>
-                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
-                            <Monitor size={40} />
-                            <span className='mt-2'>Computer</span>
-                        </div>
-                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
-                            <Watch size={40} />
-                            <span className='mt-2'>Wrist Watch</span>
-                        </div>
-                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
-                            <Camera size={40} />
-                            <span className='mt-2'>Camera</span>
-                        </div>
-                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
-                            <Headphones size={40} />
-                            <span className='mt-2'>Headphones</span>
-                        </div>
-                        <div className='flex flex-col items-center p-4 border rounded-lg shadow-sm cursor-pointer hover:shadow-md'>
-                            <Gamepad2 size={40} />
-                            <span className='mt-2'>Gaming</span>
-                        </div>
-                    </div>
+        <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6'>
+            <div className='w-full max-w-4xl flex bg-white shadow-lg rounded-2xl overflow-hidden'>
+                {/* Image Section */}
+                <div className='w-1/2'>
+                    <img src={ShopItem} alt='Shop Items' className='w-full h-full object-cover' />
                 </div>
-                <img src={ShopItem} alt='logo' className='w-1/3 rounded-lg shadow-md' />
+
+                {/* Sign-Up Form */}
+                <div className='w-1/2 p-6 flex flex-col justify-center'>
+                    <h2 className='text-2xl font-bold text-gray-800 mb-4'>Sign Up</h2>
+                    <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+                        <input
+                            type='text'
+                            name='name'
+                            placeholder='Full Name'
+                            value={formData.name}
+                            onChange={handleChange}
+                            className='p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            required
+                        />
+                        <input
+                            type='email'
+                            name='email'
+                            placeholder='Email Address'
+                            value={formData.email}
+                            onChange={handleChange}
+                            className='p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            required
+                        />
+                        <input
+                            type='password'
+                            name='password'
+                            placeholder='Password'
+                            value={formData.password}
+                            onChange={handleChange}
+                            className='p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            required
+                        />
+                        <button type='submit' className='w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg'>
+                            LogIn
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );

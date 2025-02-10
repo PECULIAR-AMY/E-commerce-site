@@ -55,13 +55,12 @@ function Home() {
     {[
         "Women's Fashion",
         "Men's Fashion",
-        "Electronics",
         "Home & Lifestyle",
-        "Medicine",
-        "Sports & Outdoor",
-        "Baby Toys",
-        "Groceries & Pets",
-        "Health & Beauty"
+        "Sunglasses",
+        "Gadgets",
+        "Groceries",
+        "Beauty & Lifestyle",
+        "Fragrances"
     ].map(category => (
         <div className="flex items-center justify-between cursor-pointer hover:text-red-500" key={category}>
             <h1>{category}</h1>
