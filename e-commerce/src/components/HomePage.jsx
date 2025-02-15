@@ -37,12 +37,6 @@ function Home() {
         localStorage.setItem('cart', JSON.stringify(updatedCart));
     };
 
-    const RemoveFromCart = (itemId) => {
-        const updatedCart = Cart.filter(item => item.id !== itemId);
-        setCart(updatedCart);
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
-    };
-
 
 
 
@@ -61,6 +55,7 @@ function Home() {
         "Groceries",
         "Beauty & Lifestyle",
         "Fragrances"
+
     ].map(category => (
         <div className="flex items-center justify-between cursor-pointer hover:text-red-500" key={category}>
             <h1>{category}</h1>
@@ -81,29 +76,6 @@ function Home() {
                     <button className="bg-red-500 text-white py-2 px-4 rounded">View All</button>
                 </div>
 
-
-                {/* Cart Section */}
-     <div className="mt-10">
-    <h2 className="text-xl font-semibold">Cart Items</h2>
-    {Cart.length > 0 ? (
-        <ul className="mt-4 space-y-2">
-            {Cart.map((item) => (
-                <li key={item.id} className="flex justify-between border p-2 rounded shadow">
-                    <span>{item.title} - ${item.price}</span>
-                    <button 
-                        onClick={() => RemoveFromCart(item.id)} 
-                        className="bg-red-500 text-white px-3 py-1 rounded text-sm"
-                    >
-                        Remove
-                    </button>
-                </li>
-            ))}
-        </ul>
-       ) : (
-        <p className="text-gray-500 mt-2">Your cart is empty.</p>
-    )}
-</div>
-
           
             {/* (Locally store watch counter) */}
 
@@ -115,7 +87,6 @@ function Home() {
                     {items.slice(0, 4).map((item) => (
                         <li key={item.id} className="border p-4 rounded-lg shadow-md text-center relative">
                             <Heart   onClick={() =>navigate("/cart")} size={24} className="absolute top-2 left-2 text-red-500 cursor-pointer" />
-                            <Delete size={24} className="absolute top-2 right-2 text-gray-500 cursor-pointer" onClick={() =>RemoveFromCart(item.id)} />
                             <div className="w-full h-40 flex justify-center items-center">
                                 <img src={item.image} alt={item.title} className="h-24 object-contain" />
                             </div>

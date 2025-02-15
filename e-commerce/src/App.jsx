@@ -3,14 +3,14 @@
  import About from './components/About'
  import Category from './components/Category'
  import CheckOut from "./components/CheckOut";
- import Cart from './components/Cart'
+ import Cart from './components/CartPage.jsx'
 import Account from "./components/AccountDopdown";
  import Contact from './components/Contact';
  import ProductDetail from './components/ProductDetails.jsx'
  import SignUp from './components/SignUp.jsx'
  import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
-
+import ResetPassword from './components/ResetPassword.jsx';
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
           <Route path="/productDetail" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/ResetPassword" element={<ResetPassword />}/>
         </Routes>
       </div>
     </Router>
