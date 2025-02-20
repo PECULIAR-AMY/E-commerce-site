@@ -8,8 +8,10 @@ import { addToCart } from "../cartSlice"; // Ensure the correct path to cartSlic
 
 function Home() {
     const dispatch = useDispatch();
-    const [items, setItems] = useState([]);
     const navigate = useNavigate();
+    const [items, setItems] = useState([]);
+    const [watchCount, setWatchCount] = useState(() => parseInt(localStorage.getItem("watchCount")) || 0);
+    const [currentTime, setCurrentTime] = useState(new Date());
 
     useEffect(() => {
         axios.get("https://fakestoreapi.com/products")
@@ -17,20 +19,24 @@ function Home() {
             .catch(error => console.error("Error fetching data", error));
     }, []);
 
-    const [watchCount, setWatchCount] = useState(() => parseInt(localStorage.getItem("watchCount")) || 0);
-    const [currentTime, setCurrentTime] = useState(new Date());
-
     useEffect(() => {
         localStorage.setItem("watchCount", watchCount);
     }, [watchCount]);
 
     useEffect(() => {
         const timeInterval = setInterval(() => {
-            setCurrentTime(new Date());
             setWatchCount(prevCount => prevCount + 1);
         }, 1000);
 
         return () => clearInterval(timeInterval);
+    }, []);
+
+    useEffect(() => {
+        const clockInterval = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(clockInterval);
     }, []);
 
     return (
@@ -40,17 +46,21 @@ function Home() {
                 <div className="space-y-4 w-full md:w-1/4">
                     <button className="text-lg font-semibold">Categories</button>
                     {[
-                        "Women's Fashion",
-                        "Men's Fashion",
-                        "Home & Lifestyle",
-                        "Sunglasses",
-                        "Gadgets",
-                        "Groceries",
-                        "Beauty & Lifestyle",
-                        "Fragrances"
+                        { name: "Women's Fashion", route: "/women-category" },
+                        { name: "Men's Fashion",  route: "/men-fashion" },
+                        { name: "Home & Lifestyle" ,  route: "/women-category" },
+                        { name: "Sunglasses" ,  route: "/sunglasses" },
+                        { name: "Gadgets",  route: "/gadgets" },
+                        { name: "Groceries" , route: "/groceries" },
+                        { name: "Beauty & Lifestyle",  route: "/beautylifestyle" },
+                        { name: "Fragrances" ,  route: "/fragrances"}
                     ].map(category => (
-                        <div className="flex items-center justify-between cursor-pointer hover:text-red-500" key={category}>
-                            <h1>{category}</h1>
+                        <div 
+                            key={category.name} 
+                            className="flex items-center justify-between cursor-pointer hover:text-red-500"
+                            onClick={() => category.route && navigate(category.route)}
+                        >
+                            <h1>{category.name}</h1>
                             <ChevronRight size={15} />
                         </div>
                     ))}
@@ -88,8 +98,7 @@ function Home() {
                             <div className="flex justify-center gap-1 my-2">
                                 {[...Array(5)].map((_, index) => <Star key={index} size={14} color="gold" />)}
                             </div>
-                            <button onClick={() => dispatch(addToCart(item))} 
-                                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded text-sm">Add to Cart</button>
+                            <button onClick={() => dispatch(addToCart(item))} className="mt-2 bg-blue-500 text-white px-4 py-2 rounded text-sm">Add to Cart</button>
                         </li>
                     ))}
                 </ul>

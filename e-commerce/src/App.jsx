@@ -12,6 +12,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import ResetPassword from './components/ResetPassword.jsx';
 import Footer from './components/Footer.jsx'; // Added Footer import
+import WomenCategory from './components/WomensCategory.jsx';
+import MensFashion from './components/MensFashion.jsx';
+import HomeLifestyle from './components/HomeLifestyle.jsx'
+import Sunglasses from './components/Sunglasses.jsx'
+import Fragrances from './components/Fragrances.jsx';
+import Groceries from './components/Groceries.jsx';
+import BeautyLifestyle from './components/BeautyLifestyle.jsx';
+import Gadgets from './components/Gadgets.jsx';
+
 
 function App() {
   return (
@@ -31,6 +40,14 @@ function App() {
             <Route path="/accountDopdown" element={<AccountDopdown />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/reset-password" element={<ResetPassword />} /> {/* Changed URL to lowercase */}
+            <Route path="/women-category" element={<WomenCategory />} />
+            <Route path="/men-fashion" element={<MensFashion />} />
+            <Route path="/home-lifestyle" element={<HomeLifestyle />} />
+            <Route path="/sunglasses" element={<Sunglasses />} />
+            <Route path="/fragrances" element={<Fragrances />} />
+            <Route path="/groceries" element={<Groceries />} />
+            <Route path="/beautylifestyle" element={<BeautyLifestyle />} />
+            <Route path="/gadgets" element={<Gadgets />} />
           </Routes>
         </div>
         <Footer />
