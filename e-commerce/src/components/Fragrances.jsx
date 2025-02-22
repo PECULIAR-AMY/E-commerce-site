@@ -8,7 +8,7 @@ function Fragrances() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("https://dummyjson.com/products/category/womens-dresses");
+                const res = await fetch('https://dummyjson.com/products/category/fragrances');
                 if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
                 
                 const data = await res.json();

@@ -8,7 +8,7 @@ function HomeLifestyle() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await fetch("https://dummyjson.com/products/category/furniture");
+                const res = await fetch('https://dummyjson.com/products/category/furniture');
                 if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
                 
                 const data = await res.json();

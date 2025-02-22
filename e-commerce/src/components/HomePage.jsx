@@ -79,7 +79,7 @@ function Home() {
                 </div>
 
                 {/* Watch Counter */}
-                <div className="p-4 border rounded-lg w-64 text-center">
+                <div className="p-4 border rounded-lg w-64 text-center bg-blue-300">
                     <h1 className="text-lg font-semibold">Watch Count: {watchCount}</h1>
                     <p className="text-sm">{currentTime.toLocaleDateString()} {currentTime.toLocaleTimeString()}</p>
                 </div>
