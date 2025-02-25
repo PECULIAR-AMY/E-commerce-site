@@ -1,14 +1,16 @@
-import { ShoppingCart, Heart, User } from "lucide-react";
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
-import { selectCartCount } from "../cartSlice"; // Import selector
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { setQuery } from "../searchSlice";
+import { selectCartCount } from "../cartSlice"; // Import selector
+import { ShoppingCart, Heart, User } from "lucide-react";
 
 function NavBar() {
-    const cartCount = useSelector(selectCartCount);
-    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
     const [error, setError] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const cartCount = useSelector(selectCartCount);
 
     const handleSearch = () => {
         if (!searchQuery.trim()) {
@@ -16,20 +18,22 @@ function NavBar() {
             return;
         }
         setError(""); // Clear error if input is valid
+        dispatch(setQuery(searchQuery)); // Update Redux state
         navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-        setSearchQuery(""); // Clear the search input
+        setSearchQuery(""); // Clear input field
     };
 
     return (
-        <div className="flex justify-between items-center py-4 border-b border-gray-300 p-20">
+        <div className="flex justify-between items-center py-4 border-b border-gray-300 px-20">
             <h1 className="text-3xl font-extrabold text-gray-800">Exclusive</h1>
             <nav className="hidden md:flex gap-6 text-gray-600 font-medium">
                 <Link to="/" className="hover:text-red-500">Home</Link>
                 <Link to="/Contact" className="hover:text-red-500">Contact</Link>
                 <Link to="/About" className="hover:text-red-500">About</Link>
-                <Link to="/Signup" className="hover:text-gray-500">Sign Up</Link>
+                <Link to="/signup" className="hover:text-gray-500">Sign Up</Link>
             </nav>
             <div className="flex gap-4 items-center">
+                {/* Search Bar */}
                 <div className="relative">
                     <input 
                         type="text" 
@@ -46,7 +50,11 @@ function NavBar() {
                 >
                     Search
                 </button>
+
+                {/* Wishlist Icon */}
                 <Heart className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
+
+                {/* Cart Icon with Badge */}
                 <div className="relative cursor-pointer" onClick={() => navigate('/cart')}>
                     <ShoppingCart className="text-gray-600 hover:text-gray-900" size={24} />
                     {cartCount > 0 && (
@@ -55,6 +63,8 @@ function NavBar() {
                         </span>
                     )}
                 </div>
+
+                {/* User Profile Icon */}
                 <User className="text-gray-600 cursor-pointer hover:text-gray-900" size={24} />
             </div>
         </div>

@@ -7,12 +7,20 @@ function WomenCategory() {
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
+            setError("");
+            
+            const categories = ["womens-dresses", "womens-bag", "womens-watches", "womens-shoes", "womens-jewellery"];
+            const apiRequests = categories.map(category =>
+                fetch(`https://dummyjson.com/products/category/${category}`).then(res => res.json())
+            );
+
             try {
-                const res = await fetch("https://dummyjson.com/products/category/womens-dresses");
-                if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+                const results = await Promise.all(apiRequests);
                 
-                const data = await res.json();
-                setProducts(data.products);
+                // Combine all products from different categories
+                const allProducts = results.flatMap(result => result.products);
+                setProducts(allProducts);
             } catch (err) {
                 console.error("Fetch error:", err);
                 setError("Failed to load products. Please try again later.");

@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 
-function MensFashion() {
+function WomenCategory() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
+            setError("");
+            
+            const categories = ["mens-shirts", "mens-shoes", "mens-watches"];
+            const apiRequests = categories.map(category =>
+                fetch(`https://dummyjson.com/products/category/${category}`).then(res => res.json())
+            );
+
             try {
-                const res = await fetch('https://dummyjson.com/products/category/mens-shoes');
-                if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+                const results = await Promise.all(apiRequests);
                 
-                const data = await res.json();
-                setProducts(data.products);
+                // Combine all products from different categories
+                const allProducts = results.flatMap(result => result.products);
+                setProducts(allProducts);
             } catch (err) {
                 console.error("Fetch error:", err);
                 setError("Failed to load products. Please try again later.");
@@ -51,4 +59,4 @@ function MensFashion() {
     );
 }
 
-export default MensFashion;
+export default WomenCategory;

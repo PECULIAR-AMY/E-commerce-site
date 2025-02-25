@@ -1,25 +1,27 @@
-import { useState } from 'react';
-import ShopItem from '../images/shop items.jpg';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ShopItem from "../images/shop items.jpg"; // Ensure correct file name
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: ''
+        name: "",
+        email: "",
+        password: "",
     });
-
     const [errors, setErrors] = useState({});
-    
+    const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
+
     const validateForm = () => {
         let newErrors = {};
         if (formData.name.trim().length < 2) {
-            newErrors.name = 'Name must be at least 2 characters long';
+            newErrors.name = "Name must be at least 2 characters long.";
         }
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
-            newErrors.email = 'Invalid email format.';
+            newErrors.email = "Invalid email format.";
         }
         if (formData.password.length < 6) {
-            newErrors.password = 'Password must be at least 6 characters long.';
+            newErrors.password = "Password must be at least 6 characters long.";
         }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -32,90 +34,73 @@ const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            console.log('Form submitted:', formData);
-        }
-        setFormData({ name: '', email: '', password: '' });
-        setErrors({});
-    };
+            const newUser = {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+            };
 
-    const handleGoogleSignIn = () => {
-        console.log('Sign in with Google clicked');
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            users.push(newUser);
+            localStorage.setItem("users", JSON.stringify(users));
+
+            console.log("User signed up successfully:", newUser);
+            setSuccessMessage("Signup successful! Redirecting to login...");
+
+            setFormData({ name: "", email: "", password: "" });
+            setErrors({});
+
+            setTimeout(() => {
+                navigate("/login");
+            }, 1500);
+        }
     };
 
     return (
-        <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6'>
-            <div className='w-full max-w-4xl flex bg-white shadow-lg rounded-2xl overflow-hidden'>
-                {/* Image Section */}
-                <div className='w-1/2'>
-                    <img src={ShopItem} alt='Shop Items' className='w-full h-full object-cover' />
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+            <div className="w-full max-w-4xl flex bg-white shadow-lg rounded-2xl overflow-hidden">
+                <div className="w-1/2">
+                    <img src={ShopItem} alt="Shop Items" className="w-full h-full object-cover" />
                 </div>
-
-                {/* Sign-Up Form */}
-                <div className='w-1/2 p-6 flex flex-col justify-center'>
-                    <h2 className='text-2xl font-bold text-gray-800 mb-4'>Create Account</h2>
-                    <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-                        <div>
-                            <input
-                                type='text'
-                                name='name'
-                                placeholder='Full Name'
-                                value={formData.name}
-                                onChange={handleChange}
-                                className={`p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                                    errors.name ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-                                }`}
-                            />
-                            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                        </div>
-
-                        <div>
-                            <input
-                                type='email'
-                                name='email'
-                                placeholder='Email Address'
-                                value={formData.email}
-                                onChange={handleChange}
-                                className={`p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                                    errors.email ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-                                }`}
-                            />
-                            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                        </div>
-
-                        <div>
-                            <input
-                                type='password'
-                                name='password'
-                                placeholder='Password'
-                                value={formData.password}
-                                onChange={handleChange}
-                                className={`p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                                    errors.password ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-                                }`}
-                            />
-                            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
-                        </div>
-
-                        {/* Create Account Button */}
-                        <button type='submit' className='w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg'>
+                <div className="w-1/2 p-6 flex flex-col justify-center">
+                    <h2 className="text-2xl font-bold text-gray-800 mb-4">Create Account</h2>
+                    {successMessage && <p className="text-green-600">{successMessage}</p>}
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Full Name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className={`w-full p-3 border rounded-lg ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        />
+                        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email Address"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className={`w-full p-3 border rounded-lg ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                        />
+                        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className={`w-full p-3 border rounded-lg ${errors.password ? "border-red-500" : "border-gray-300"}`}
+                        />
+                        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
                             Create Account
                         </button>
-
-                        {/* Sign in with Google Button */}
-                        <button 
-                            type='button' 
-                            onClick={handleGoogleSignIn} 
-                            className='w-full flex items-center justify-center gap-2 border border-gray-400 text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-lg'
-                        >
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" 
-                                alt="Google Logo" className="w-5 h-5" 
-                            />
-                            Sign in with Google
-                        </button>
-
-                        {/* Already have an account? Login */}
                         <p className="text-center text-gray-600 mt-4">
-                            Already have an account? <a href="/login" className="text-blue-600 hover:underline">Login</a>
+                            Already have an account?{" "}
+                            <a href="/login" className="text-blue-600 hover:underline">
+                                Login
+                            </a>
                         </p>
                     </form>
                 </div>

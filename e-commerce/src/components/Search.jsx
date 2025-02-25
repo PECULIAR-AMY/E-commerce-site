@@ -1,20 +1,29 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const products = useSelector((state) => state.products.items); // Assuming you have a `products` slice
 
+  // Get products from Redux store
+  const products = useSelector((state) => state.products.items); 
+
+  // Handle search function
   const handleSearch = () => {
-    const filtered = products.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
+    if (!query.trim()) return; // Prevent empty searches
+
+    const filteredProducts = products.filter((product) =>
+      product.name.toLowerCase().includes(query.toLowerCase()) ||
+      product.category.toLowerCase().includes(query.toLowerCase()) ||
+      product.description.toLowerCase().includes(query.toLowerCase())
     );
-    setResults(filtered);
+
+    setResults(filteredProducts);
   };
 
   return (
     <div className="p-4">
+      {/* Search Input */}
       <div className="flex gap-2">
         <input
           type="text"
@@ -25,19 +34,21 @@ const SearchBar = () => {
         />
         <button
           onClick={handleSearch}
-          className="bg-blue-500 text-white p-2 rounded-md"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md"
         >
           Search
         </button>
       </div>
 
-      {/* Display search results */}
+      {/* Display Search Results */}
       <div className="mt-4">
         {results.length > 0 ? (
           <ul>
             {results.map((product) => (
               <li key={product.id} className="border p-2 mt-2 rounded-md">
-                {product.name} - ${product.price}
+                <strong>{product.name}</strong> - ${product.price} 
+                <br />
+                <span className="text-gray-600">{product.category}</span>
               </li>
             ))}
           </ul>

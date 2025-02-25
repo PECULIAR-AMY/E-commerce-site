@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 import ProductDetail from './components/ProductDetails.jsx';
 import SignUp from './components/SignUp.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
+import NavBar from "./components/NavBar.jsx"
 import ResetPassword from './components/ResetPassword.jsx';
 import Footer from './components/Footer.jsx'; // Added Footer import
 import WomenCategory from './components/WomensCategory.jsx';
@@ -20,6 +20,7 @@ import Fragrances from './components/Fragrances.jsx';
 import Groceries from './components/Groceries.jsx';
 import BeautyLifestyle from './components/BeautyLifestyle.jsx';
 import Gadgets from './components/Gadgets.jsx';
+import SearchResults from './components/SearchResult.jsx';
 
 
 function App() {
@@ -29,12 +30,12 @@ function App() {
         <NavBar />
         <div className="flex-grow">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+           <Route path="/" element={<SignUp />} />
+            <Route path="/homepage" element={<HomePage />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/about" element={<About />} />
             <Route path="/category" element={<Category />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/signup" element={<SignUp />} />
             <Route path="/checkout" element={<CheckOut />} />
             <Route path="/product-detail" element={<ProductDetail />} />
             <Route path="/accountDopdown" element={<AccountDopdown />} />
@@ -48,6 +49,7 @@ function App() {
             <Route path="/groceries" element={<Groceries />} />
             <Route path="/beautylifestyle" element={<BeautyLifestyle />} />
             <Route path="/gadgets" element={<Gadgets />} />
+            <Route path="/search" element={<SearchResults />} />
           </Routes>
         </div>
         <Footer />
